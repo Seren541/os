@@ -1,7 +1,7 @@
 CCFLAGS = -Iinclude -ggdb -c -ffreestanding
 
-kernel.bin: kernel.o entry.o io.o vga.o string.o idt.o idt_flush.o isr.o interrupts.o
-	ld.lld -o ../kernel.bin -Ttext 0xffff entry.o kernel.o io.o vga.o string.o idt.o idt_flush.o isr.o interrupts.o --oformat binary
+kernel.bin: kernel.o entry.o io.o vga.o string.o idt.o idt_flush.o isr.o interrupts.o timer.o
+	ld.lld -o ../kernel.bin -Ttext 0xffff entry.o kernel.o io.o vga.o string.o idt.o idt_flush.o isr.o interrupts.o timer.o --oformat binary
 	rm *.o
 
 interrupts.o:
@@ -30,3 +30,9 @@ idt.o:
 
 isr.o:
 	gcc isr.c ${CCFLAGS} -o isr.o
+
+timer.o:
+	gcc timer.c ${CCFLAGS} -o timer.o
+
+clean: 
+	rm *.o

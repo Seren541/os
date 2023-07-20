@@ -3,17 +3,21 @@
 #include <string.h>
 #include <types.h>
 #include <idt.h>
+#include <timer.h>
 
 int main() {
-
-    init_idt();
 
     hide_cursor();
     clear_window();
 
+    init_idt();
+    init_timer(50);
+
+    __asm__ volatile ("sti"); //enable interupts
 
     print("Hello world  ");
-    __asm__ volatile ("int $0x3");
+    __asm__ volatile ("int $0x2");
 
-    return 0;
+    while(1)
+        __asm__ volatile("hlt");
 }

@@ -71,6 +71,23 @@ gdt_64_data:
     db 0b10100000       ; 2nd Flags, Limit (bits 16-19)
     db 0x00             ; Base  (bits 24-31)
 
+user_code:
+    dw 0xffff
+    dw 0x0
+    db 0x0
+    db 0b11111010
+    db 0b10101111
+    db 0x0
+
+user_data:
+    dw 0xffff
+    dw 0x0
+    db 0x0
+    db 0b11110010
+    db 0b10101111
+    db 0x0
+
+
 gdt_64_end:
 
 ; Define the gdt descriptor
